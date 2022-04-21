@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "797383245296",
+    "project_id": "experiment-efe11",
+    "storage_bucket": "experiment-efe11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797383245296:android:75bc780e325e671168f135",
+        "android_client_info": {
+          "package_name": "com.webbala.experiment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "797383245296-e7b9a43kpl8is6213s72sve03146eh7e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfNvW7Yhn5UsrLhdJxwptX-JTr4o47tRc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "797383245296-e7b9a43kpl8is6213s72sve03146eh7e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
