@@ -1,0 +1,70 @@
+// // import { getMessaging } from "firebase/messaging";
+
+// const functions = require("firebase-functions");
+// const admin = require("firebase-admin");
+// admin.initializeApp();
+
+
+// exports.sendHttpPushNotification = functions.https.onRequest((req, res) => {
+
+//     const payload = {
+//         token: "AAAAuae-vfA:APA91bEcUzAf9tKbMssn5tjmMQmz_rdfkcC5ZgJvLlKkZE5UNKrxWN39hEGODWW3E2cSTcsgk924E7pS70YiK9koNcvAvcqFk1LxTOPmJ7jEJo1w9QC0e4KspRLdkNAQa3X87vxKnDnS",
+//         notification: {
+//             title: "cloud function demo",
+//             body: "message",
+//         }
+//     };
+
+//     admin.messaging().send(payload).then((response) => {
+//         // Response is a message ID string.
+//         console.log('Successfully sent message:', response);
+//         return { success: true };
+//     }).catch((error) => {
+//         return { error: error.code };
+//     });
+// });
+
+const functions = require("firebase-functions");
+const admin = require("firebase-admin");
+admin.initializeApp();
+
+
+exports.androidPushNotification = functions.firestore.document("Notifications/{docId}").onCreate(
+    (snapshot, context) => {
+        functions.logger.info('New notification was created');
+        // admin.firestore().collection("DeviceTokens").get().then(
+            // result => {
+                // var registrationTokens = [];
+                // result.docs.forEach(
+                //     tokenDocument => {
+                //         console.log('Token available', tokenDocument);
+                //         registrationTokens.push(tokenDocument.data().token);
+                //     }
+                // );
+                // admin.messaging().sendMulticast(
+                //     {
+                //         tokens: registrationTokens,
+                //         notification: {
+                //             title: snapshot.data().title,
+                //             body: snapshot.data().body
+                //         }
+                //     }
+                // );
+                admin.messaging().sendToTopic(
+                    "new_user_forums",{
+                    // tokens: registrationTokens,
+                    notification: {
+                        title: snapshot.data().title,
+                        body: snapshot.data().body
+                    }
+                }).then((response) => {
+                    // Response is a message ID string.
+                    functions.logger.info('Successfully sent message:', response);
+                    return { success: true };
+                }).catch((error) => {
+                    functions.logger.info('Failed to send message:', error);
+                });
+            // }
+        // );
+    }
+);
